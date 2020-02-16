@@ -1,0 +1,1 @@
+This is my attempt of my first console-level game of rock, paper, scissors as assigned on The Odin Project curriculum.
