@@ -20,35 +20,54 @@
 
     let playerSelection;
     let computerSelection;
+    let playerWins = 0;
+    let computerWins = 0;
 
     function playRound(playerSelection, computerSelection) {
         computerSelection = computerPlay();
-        playerSelection = prompt("Choice?").toLowerCase();
+        playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
 
         if (playerSelection === computerSelection) {
-            return "You tie!";
+            console.log("You tie!");
         } else if (playerSelection === "rock" && computerSelection === "scissors") {
-            return "You win! Rock beats scissors!";
+            console.log("You win! Rock beats scissors!");
+            playerWins += 1; 
         } else if (playerSelection === "rock" && computerSelection === "paper") {
-            return "You lose! Paper beats rock!";
+            console.log("You lose! Paper beats rock!");
+            computerWins += 1;
         } else if (playerSelection === "paper" && computerSelection === "scissors") {
-            return "You lose! Scissors beats paper!";
+            console.log("You lose! Scissors beats paper!");
+            computerWins += 1;
         } else if (playerSelection === "paper" && computerSelection === "rock") {
-            return "You win! Paper beats rock!";
+            console.log("You win! Paper beats rock!");
+            playerWins += 1;
         } else if (playerSelection === "scissors" && computerSelection === "paper") {
-            return "You win! Scissors beats paper!";
+            console.log("You win! Scissors beats paper!");
+            playerWins += 1;
         } else if (playerSelection === "scissors" && computerSelection === "rock") {
-            return "You lose! Rock beats scissors";
+            console.log("You lose! Rock beats scissors");
+            computerWins += 1;
         } else {
-            return "You need to pick rock, paper, or scissors."
+            console.log("You need to pick rock, paper, or scissors.");
         }
     }
-        
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
+    
+    function game() {
+        playRound(playerSelection, computerSelection);
+        playRound(playerSelection, computerSelection);
+        playRound(playerSelection, computerSelection);
+        playRound(playerSelection, computerSelection);
+        playRound(playerSelection, computerSelection);
+        if (playerWins > computerWins) {
+            console.log("You win! You won " + playerWins + " rounds!")
+        } else if (playerWins < computerWins) {
+            console.log("You lost. The computer won " + computerWins + " rounds.");
+        } else {
+            console.log("You tied!");
+        }
+    }
+
+    console.log(game());
 
 
   </script>
