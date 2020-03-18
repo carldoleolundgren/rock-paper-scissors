@@ -14,59 +14,72 @@ let playerSelection;
 let computerSelection;
 let playerWins = 0;
 let computerWins = 0;
+let roundsPlayed = 0;
 
 
 function playRound() {
-    const resultsContainer = document.querySelector('#resultsContainer');
+    const bigContainer = document.querySelector('#bigContainer');
     const gameResult = document.createElement('div');
     gameResult.classList.add('gameResult');
 
-    if (playerSelection === computerSelection) {
-        gameResult.textContent = "You tie!";
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        gameResult.textContent = "You win! Rock beats scissors!";
-        playerWins += 1;
-        document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "rock" && computerSelection === "paper") {
-        gameResult.textContent = "You lose! Paper beats rock!";
-        computerWins += 1;
-        document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        gameResult.textContent = "You lose! Scissors beats paper!";
-        computerWins += 1;
-        document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "paper" && computerSelection === "rock") {
-        gameResult.textContent = "You win! Paper beats rock!";
-        playerWins += 1;
-        document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        gameResult.textContent = "You win! Scissors beats paper!";
-        playerWins += 1;
-        document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
-        resultsContainer.appendChild(gameResult);
-
-    } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        gameResult.textContent = "You lose! Rock beats scissors";
-        computerWins += 1;
-        document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
-        resultsContainer.appendChild(gameResult);
-
+    if (roundsPlayed < 4) {
+        if (playerSelection === computerSelection) {
+            gameResult.textContent = "You tie!";
+            resultsContainer.appendChild(gameResult);
+    
+        } else if (playerSelection === "rock" && computerSelection === "scissors") {
+            gameResult.textContent = "You win! Rock beats scissors!";
+            resultsContainer.appendChild(gameResult);
+            playerWins += 1;
+            document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
+    
+        } else if (playerSelection === "rock" && computerSelection === "paper") {
+            gameResult.textContent = "You lose! Paper beats rock!";
+            resultsContainer.appendChild(gameResult);
+            computerWins += 1;
+            document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
+    
+        } else if (playerSelection === "paper" && computerSelection === "scissors") {
+            gameResult.textContent = "You lose! Scissors beats paper!";
+            resultsContainer.appendChild(gameResult);
+            computerWins += 1;
+            document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
+    
+        } else if (playerSelection === "paper" && computerSelection === "rock") {
+            gameResult.textContent = "You win! Paper beats rock!";
+            resultsContainer.appendChild(gameResult);
+            playerWins += 1;
+            document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
+    
+        } else if (playerSelection === "scissors" && computerSelection === "paper") {
+            gameResult.textContent = "You win! Scissors beats paper!";
+            resultsContainer.appendChild(gameResult);
+            playerWins += 1;
+            document.getElementById("playerScoreContainer").textContent="Your Score: " + playerWins; 
+    
+        } else if (playerSelection === "scissors" && computerSelection === "rock") {
+            gameResult.textContent = "You lose! Rock beats scissors";
+            resultsContainer.appendChild(gameResult);
+            computerWins += 1;
+            document.getElementById("computerScoreContainer").textContent="Computer's Score: " + computerWins; 
+    
+        } else {
+            gameResult.textContent = "You need to pick rock, paper, or scissors.";
+            resultsContainer.appendChild(gameResult);
+        }    
     } else {
-        gameResult.textContent = "You need to pick rock, paper, or scissors.";
-        resultsContainer.appendChild(gameResult);
-
+        if (playerWins > computerWins) {
+            document.getElementById("resultsContainer").textContent= "You win! You won " + playerWins + " rounds!";
+        } else if (playerWins < computerWins) {
+            document.getElementById("resultsContainer").textContent= "You lost. The computer won " + computerWins + " rounds.";
+        } else {
+            document.getElementById("resultsContainer").textContent= "You tied!";
+        }
     }
+
+    
 }
+
 
 const buttons = document.querySelectorAll('button');
 
@@ -75,8 +88,20 @@ buttons.forEach((button) => {
     playerSelection = button.value;
     computerSelection = computerPlay();
     playRound();
+    roundsPlayed += 1;
   });
 });
+
+/*
+    if (roundsPlayed => 5) {
+        if (playerWins > computerWins) {
+            document.getElementById("bigContainer").textContent= "You win! You won " + playerWins + " rounds!";
+        } else if (playerWins < computerWins) {
+            document.getElementById("bigContainer").textContent= "You lost. The computer won " + computerWins + " rounds.";
+        } else {
+            document.getElementById("bigContainer").textContent= "You tied!";
+    }
+*/
 
 /*
 function game() {
