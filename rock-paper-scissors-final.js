@@ -18,7 +18,6 @@ let roundsPlayed = 0;
 
 
 function playRound() {
-    const bigContainer = document.querySelector('#bigContainer');
     const gameResult = document.createElement('div');
     gameResult.classList.add('gameResult');
 
